@@ -1,0 +1,16 @@
+# PostgreSQL with the pgvector extension preinstalled (needed for RAG).
+# Matches the default DB_URL (port 1574, database job_tracker).
+#   DB_PASSWORD=change-me docker compose up -d
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: job_tracker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+    ports:
+      - "1574:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
